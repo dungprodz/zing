@@ -47,7 +47,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         try {
             log.info("{} logout currentToken {}", getClass().getSimpleName(), token);
             String currentToken = token.substring(7);
-
             // kiểm tra token đã hết hạn chưa
             if (!jwtTokenUtil.isTokenExpired(currentToken)) {
                 // nếu token chưa hết hạn, cần set lại thời gian hết hạn của token
@@ -57,7 +56,6 @@ public class JwtUserDetailsService implements UserDetailsService {
                 String updatedToken = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secretKey).compact();
 //                log.info("{} logout updatedToken {}", getClass().getSimpleName(), updatedToken);
             }
-
             return new JwtLogoutResponseBody(Common.SUCCESS);
         } catch (Exception e) {
             log.error("{} Exception {}", getClass().getSimpleName(), e);
