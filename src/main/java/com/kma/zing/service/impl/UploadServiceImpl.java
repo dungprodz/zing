@@ -32,7 +32,7 @@ public class UploadServiceImpl implements UploadService {
         String fileName = getUniqueUploadFileName(Objects.requireNonNull(file.getOriginalFilename()));
 
         // tạo đường dẫn tới folder chứa avatar
-        String pathToAvatar = "D:/f8/ZingMP3/beginer/src/assets" + fileName;
+        String pathToAvatar = "D:/f8/ZingMP3/beginer/src/assets/" + fileName;
         File fileDirectory = new File(pathToAvatar);
         if (!fileDirectory.exists()) {
             fileDirectory.mkdirs();
