@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/zing/v1/user")
 @CrossOrigin("*")
@@ -27,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<SearchByUserNameResponseBody> searchUser() throws Exception {
-        SearchByUserNameResponseBody responseBody = userService.searchUser();
+    public ResponseEntity<SearchByUserNameResponseBody> searchUser(HttpServletRequest httpServletRequest) throws Exception {
+        SearchByUserNameResponseBody responseBody = userService.searchUser(httpServletRequest);
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }
