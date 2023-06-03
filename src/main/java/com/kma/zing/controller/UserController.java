@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<SearchByUserNameResponseBody> searchUser() throws Exception {
-        SearchByUserNameResponseBody responseBody = userService.searchUser();
+    public ResponseEntity<SearchByUserNameResponseBody> searchUser(@RequestBody SearchByUserNameRequestBody requestBody) throws Exception {
+        SearchByUserNameResponseBody responseBody = userService.searchUser(requestBody);
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }
