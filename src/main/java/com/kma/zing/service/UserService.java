@@ -8,5 +8,5 @@ import com.kma.zing.model.responsebody.UpdateUserResponseBody;
 public interface UserService {
     UpdateUserResponseBody updateUser(UpdateUserRequestBody requestBody) throws Exception;
 
-    SearchByUserNameResponseBody searchUser(SearchByUserNameRequestBody requestBody);
+    SearchByUserNameResponseBody searchUser();
 }
