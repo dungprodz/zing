@@ -1,29 +1,31 @@
 package com.kma.zing.service.impl;
 
 import com.kma.zing.entity.TblUserInforEntity;
+import com.kma.zing.model.GetListUser;
+import com.kma.zing.model.requestbody.SearchByUserNameRequestBody;
 import com.kma.zing.model.requestbody.UpdateUserRequestBody;
 import com.kma.zing.model.responsebody.SearchByUserNameResponseBody;
 import com.kma.zing.model.responsebody.UpdateUserResponseBody;
 import com.kma.zing.repository.UserInfoRepository;
 import com.kma.zing.service.UserService;
 import com.kma.zing.ulti.Common;
-import com.kma.zing.ulti.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserInfoRepository userInfoRepository;
-    private final JwtTokenUtil jwtTokenUtil;
     @Autowired
-    public UserServiceImpl(UserInfoRepository userInfoRepository, JwtTokenUtil jwtTokenUtil) {
+    public UserServiceImpl(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
-        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @Override
@@ -42,11 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SearchByUserNameResponseBody searchUser(HttpServletRequest httpServletRequest) {
+    public SearchByUserNameResponseBody searchUser() {
         SearchByUserNameResponseBody responseBody = new SearchByUserNameResponseBody();
-        String requestHeader = httpServletRequest.getHeader(Common.HEADER_AUTHORIZATION);
-        String username = jwtTokenUtil.getUsernameFromToken(requestHeader.substring(7));
-        TblUserInforEntity userInfo = userInfoRepository.findByUsername(username);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        TblUserInforEntity userInfo = userInfoRepository.findByUsername(userName);
         responseBody.setEmail(userInfo.getEmail());
         responseBody.setPhoneNumber(userInfo.getPhonenumber());
         responseBody.setFullName(userInfo.getFullname());

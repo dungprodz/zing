@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         httpSecurity.cors().and().csrf().disable()
                 // don't authenticate this particular request
-                .authorizeRequests().antMatchers("/zing/v1/auth/login", "/zing/v1/register").permitAll()
+                .authorizeRequests().antMatchers("/zing/v1/auth/login","/zing/v1/auth/logout","/zing/v1/register").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to
