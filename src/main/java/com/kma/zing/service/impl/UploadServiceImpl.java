@@ -32,7 +32,7 @@ public class UploadServiceImpl implements UploadService {
         String fileName = getUniqueUploadFileName(Objects.requireNonNull(file.getOriginalFilename()));
 
         // tạo đường dẫn tới folder chứa avatar
-        String pathToAvatar = "D:/f8/zing/zing/image/" + fileName;
+        String pathToAvatar = "D:/f8/ZingMP3/beginer/src/assets" + fileName;
         File fileDirectory = new File(pathToAvatar);
         if (!fileDirectory.exists()) {
             fileDirectory.mkdirs();
@@ -40,7 +40,7 @@ public class UploadServiceImpl implements UploadService {
         // lưu avatar vào đường dẫn trên
         file.transferTo(new File(pathToAvatar));
 
-        String filePath = "image/" + fileName;
+        String filePath = "assets/" + fileName;
         userInfo.setUserimg(filePath);
 
         userInfoRepository.save(userInfo);
