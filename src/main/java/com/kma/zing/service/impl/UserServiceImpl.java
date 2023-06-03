@@ -2,13 +2,17 @@ package com.kma.zing.service.impl;
 
 import com.kma.zing.entity.TblUserInforEntity;
 import com.kma.zing.model.GetListUser;
+import com.kma.zing.model.requestbody.SearchByUserNameRequestBody;
 import com.kma.zing.model.requestbody.UpdateUserRequestBody;
+import com.kma.zing.model.responsebody.SearchByUserNameResponseBody;
 import com.kma.zing.model.responsebody.UpdateUserResponseBody;
 import com.kma.zing.repository.UserInfoRepository;
 import com.kma.zing.service.UserService;
 import com.kma.zing.ulti.Common;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +40,19 @@ public class UserServiceImpl implements UserService {
         userInfo.setPhonenumber(requestBody.getPhoneNumber());
         userInfoRepository.save(userInfo);
         responseBody.setStatus(Common.SUCCESS);
+        return responseBody;
+    }
+
+    @Override
+    public SearchByUserNameResponseBody searchUser(SearchByUserNameRequestBody requestBody) {
+        SearchByUserNameResponseBody responseBody = new SearchByUserNameResponseBody();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        TblUserInforEntity userInfo = userInfoRepository.findByUsername(userName);
+        responseBody.setEmail(userInfo.getEmail());
+        responseBody.setPhoneNumber(userInfo.getPhonenumber());
+        responseBody.setFullName(userInfo.getFullname());
+        responseBody.setImage(userInfo.getUserimg());
         return responseBody;
     }
 }

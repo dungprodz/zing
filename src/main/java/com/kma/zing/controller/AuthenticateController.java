@@ -19,6 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("zing/v1/auth")
+@CrossOrigin("*")
 public class AuthenticateController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;

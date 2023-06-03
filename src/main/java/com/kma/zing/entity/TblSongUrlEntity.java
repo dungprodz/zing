@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_song_url", schema = "selena", catalog = "")
+@Table(name = "tbl_song_url")
 public class TblSongUrlEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

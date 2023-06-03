@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_users_roles", schema = "selena", catalog = "")
+@Table(name = "tbl_users_roles")
 @IdClass(TblUsersRolesEntityPK.class)
 public class TblUsersRolesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

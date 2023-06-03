@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<TblUsersEntity, Integer> {
     TblUsersEntity findAllByUsernameAndStatus(String userName, String status);
 
-
+    TblUsersEntity findByUsername(String userName);
 }

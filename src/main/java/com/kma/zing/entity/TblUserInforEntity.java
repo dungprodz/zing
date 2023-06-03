@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_user_infor", schema = "selena", catalog = "")
+@Table(name = "tbl_user_infor")
 public class TblUserInforEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -17,6 +17,9 @@ public class TblUserInforEntity {
     @Column(name = "username")
     private String username;
     @Basic
+    @Column(name = "userimg")
+    private String userimg;
+    @Basic
     @Column(name = "fullname")
     private String fullname;
     @Basic
@@ -25,6 +28,14 @@ public class TblUserInforEntity {
     @Basic
     @Column(name = "email")
     private String email;
+
+    public String getUserimg() {
+        return userimg;
+    }
+
+    public void setUserimg(String userimg) {
+        this.userimg = userimg;
+    }
 
     public int getId() {
         return id;
