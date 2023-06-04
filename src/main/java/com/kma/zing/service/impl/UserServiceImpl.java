@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UpdateUserResponseBody updateUser(UpdateUserRequestBody requestBody) throws Exception {
         UpdateUserResponseBody responseBody = new UpdateUserResponseBody();
-        TblUserInforEntity userInfo = userInfoRepository.findByUserid(requestBody.getUserid());
+        TblUserInforEntity userInfo = userInfoRepository.findByUsername(requestBody.getUserName());
         if(Objects.isNull(userInfo)){
             throw new Exception("DATA NOT FOUND");
         }
