@@ -44,11 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SearchByUserNameResponseBody searchUser(SearchByUserNameRequestBody requestBody) {
+    public SearchByUserNameResponseBody searchUser() {
         SearchByUserNameResponseBody responseBody = new SearchByUserNameResponseBody();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String userName = authentication.getName();
-        TblUserInforEntity userInfo = userInfoRepository.findByUsername(requestBody.getUserName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        TblUserInforEntity userInfo = userInfoRepository.findByUsername(userName);
         responseBody.setEmail(userInfo.getEmail());
         responseBody.setPhoneNumber(userInfo.getPhonenumber());
         responseBody.setFullName(userInfo.getFullname());
