@@ -25,12 +25,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public UploadResponseBody uploadUserImg(MultipartFile file) throws IOException {
         UploadResponseBody responseBody = new UploadResponseBody();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName();
-        TblUserInforEntity userInfo = userInfoRepository.findByUsername(userName);
-
         String fileName = getUniqueUploadFileName(Objects.requireNonNull(file.getOriginalFilename()));
-
         // tạo đường dẫn tới folder chứa avatar
         String pathToAvatar = "D:/f8/ZingMP3/beginer/src/assets/" + fileName;
         File fileDirectory = new File(pathToAvatar);
@@ -39,9 +34,6 @@ public class UploadServiceImpl implements UploadService {
         }
         // lưu avatar vào đường dẫn trên
         file.transferTo(new File(pathToAvatar));
-        userInfo.setUserimg(fileName);
-
-        userInfoRepository.save(userInfo);
         responseBody.setUserImg(fileName);
 
         return responseBody;
