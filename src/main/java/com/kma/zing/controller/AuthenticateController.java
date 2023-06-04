@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("zing/v1/auth")
-@CrossOrigin("*")
 public class AuthenticateController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
