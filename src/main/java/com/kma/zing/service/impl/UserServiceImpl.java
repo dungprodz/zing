@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         userInfo.setEmail(requestBody.getEmail());
         userInfo.setFullname(requestBody.getFullName());
         userInfo.setPhonenumber(requestBody.getPhoneNumber());
+        userInfo.setUserimg(requestBody.getUserImg());
         userInfoRepository.save(userInfo);
         responseBody.setStatus(Common.SUCCESS);
         return responseBody;
@@ -54,5 +55,5 @@ public class UserServiceImpl implements UserService {
         responseBody.setFullName(userInfo.getFullname());
         responseBody.setImage(userInfo.getUserimg());
         return responseBody;
-    }
+    }   
 }
