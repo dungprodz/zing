@@ -34,7 +34,7 @@ public class UploadServiceImpl implements UploadService {
         }
         // lưu avatar vào đường dẫn trên
         file.transferTo(new File(pathToAvatar));
-        responseBody.setUserImg(fileName);
+        responseBody.setUserImg("../../assets/"+fileName);
 
         return responseBody;
     }
